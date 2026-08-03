@@ -1,11 +1,10 @@
-# HRIS
+# WEB BASED HUMAN RESOURCE INFORMATION SYSTEM (HRIS)
 Human Resource Information System 
 
 # PREPARATION
 ## Create Database
--- =========================
--- TABLE: departments
--- =========================
+**TABLE: departments**
+```sql
 CREATE TABLE departments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     department_code VARCHAR(3) NOT NULL UNIQUE,
@@ -13,10 +12,10 @@ CREATE TABLE departments (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
 
--- =========================
--- TABLE: positions
--- =========================
+**TABLE: positions**
+```sql
 CREATE TABLE positions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     department_id INT NOT NULL,
@@ -38,10 +37,10 @@ CREATE TABLE positions (
         position_name
     )
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
 
--- =========================
--- TABLE: employees
--- =========================
+**TABLE: employees**
+```sql
 CREATE TABLE employees (
     id INT AUTO_INCREMENT PRIMARY KEY,
     employee_code VARCHAR(20) NOT NULL UNIQUE,
@@ -114,10 +113,10 @@ CREATE TABLE employees (
         ON UPDATE CASCADE
         ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
 
--- =========================
--- TABLE: payroll
--- =========================
+**TABLE: payroll**
+```sql
 CREATE TABLE payroll (
     id INT AUTO_INCREMENT PRIMARY KEY,
 
@@ -171,10 +170,10 @@ CREATE TABLE payroll (
         ON UPDATE CASCADE
         ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
 
--- =========================
--- TABLE: attendance
--- =========================
+**TABLE: attendance**
+```sql
 CREATE TABLE attendance (
     id INT AUTO_INCREMENT PRIMARY KEY,
 
@@ -213,3 +212,10 @@ CREATE TABLE attendance (
         ON UPDATE CASCADE
         ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
+
+## Node Project Preparation
+### Initial Node Project
+Starting in terminal '*npm init -y*'
+**NOTE : INSTALL NODE FIRST BEFORE USING THIS COMMAND LINE**
+

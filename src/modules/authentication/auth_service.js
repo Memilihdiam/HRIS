@@ -1,9 +1,9 @@
-const pool = require('../config/db');
+const pool = require('../../config/db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const { HTTP_STATUS } = require('../utils/util');
-const { employer_code_gen } = require('../utils/employer_code_generator');
-const auth_repository = require('../repository/auth_repository');
+const { HTTP_STATUS } = require('../../utils/util');
+const { employer_code_gen } = require('../../utils/employer_code_generator');
+const auth_repository = require('./auth_repository');
 
 /**
  * Authentication user and return a jwt token

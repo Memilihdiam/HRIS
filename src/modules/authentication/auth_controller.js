@@ -1,5 +1,5 @@
-const auth_service = require('../service/auth_service');
-const { HTTP_STATUS } = require('../utils/util');
+const auth_service = require('./auth_service');
+const { HTTP_STATUS } = require('../../utils/util');
 
 exports.login = async (req, res) => {
     const { employee_code, password } = req.body;
@@ -10,13 +10,14 @@ exports.login = async (req, res) => {
         // Mengirim response sukses
         res.status(HTTP_STATUS.OK).json({
             success: true,
-            message: 'Auth Success'
+            message: 'Auth Success',
+            token: token
         });
     }catch(err){
         console.log('Error login function, ', err);
-        return res.status(HTTP_STATUS).json({
+        return res.status(err.statusCode || HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
             success: false,
-            message: 'Internal Server Error'
+            message: err.message || 'Internal Server Error'
         });
     };
 };
@@ -36,7 +37,7 @@ exports.register = async (req, res) => {
             data: newEmployee
         });
     } catch (err) {
-        console.log("Error saat register, ", err);
+        console.log("Error register function, ", err);
         return res.status(err.statusCode || HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
             success: false,
             message: err.message || "Internal Server Error"
