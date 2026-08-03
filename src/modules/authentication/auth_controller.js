@@ -5,13 +5,20 @@ exports.login = async (req, res) => {
     const { employee_code, password } = req.body;
     try{
         // Memanggil service untuk mendapatkan token
-        const { token } = await auth_service.login_user(employee_code, password);
+        const { sessionId } = await auth_service.login_user(employee_code, password);
+
+        // Set session ID in an HTTP-Only cookie
+        res.cookie('sessionId', sessionId, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 24 * 60 * 60 * 1000, // 1 day
+            path: '/'
+        });
 
         // Mengirim response sukses
         res.status(HTTP_STATUS.OK).json({
             success: true,
-            message: 'Auth Success',
-            token: token
+            message: 'Auth Success'
         });
     }catch(err){
         console.log('Error login function, ', err);
@@ -20,27 +27,4 @@ exports.login = async (req, res) => {
             message: err.message || 'Internal Server Error'
         });
     };
-};
-
-exports.register = async (req, res) => {
-    try {
-        // Mengambil data dari body request
-        const employeeData = req.body;
-
-        // Memanggil service untuk menambahkan employee baru
-        const newEmployee = await auth_service.register_user(employeeData);
-
-        // Mengirim response sukses
-        res.status(HTTP_STATUS.CREATED).json({
-            success: true,
-            message: "Successfully Add Employee",
-            data: newEmployee
-        });
-    } catch (err) {
-        console.log("Error register function, ", err);
-        return res.status(err.statusCode || HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
-            success: false,
-            message: err.message || "Internal Server Error"
-        });
-    }
 };

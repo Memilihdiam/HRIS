@@ -1,3 +1,5 @@
+import { api_endpoint } from "../../shared/api.js";
+
 const loginForm = document.getElementById('login-form');
 const codeInput = document.getElementById('code');
 const passwordInput = document.getElementById('password');
@@ -24,8 +26,7 @@ loginForm.addEventListener('submit', async(e) => {
         const data = await response.json();
 
         if(response.ok){
-            localStorage.setItem('token', data.token);
-            window.location.href = '/pages/dashboard.html';
+            window.location.href = '/pages/dashboard';
         }else{
             message.textContent = data.message;
         }
