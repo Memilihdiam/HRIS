@@ -24,7 +24,7 @@ exports.find_user_by_id = async (id) => {
             d.department_code AS department_code,
             p.position_name AS position_name,
             p.position_code AS position_code
-        FROM employers e
+        FROM employees e
         LEFT JOIN departments d ON e.department_id = d.id
         LEFT JOIN positions p ON e.position_id = p.id
         WHERE e.id = ?

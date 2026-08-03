@@ -12,7 +12,7 @@ exports.find_user_for_login = async (employee_code) => {
             e.*, 
             p.position_code,
             d.department_code
-        FROM employers e
+        FROM employees e
         JOIN positions p ON e.position_id = p.id
         JOIN departments d ON e.position_id = d.id
         WHERE e.employee_code = ?`, [employee_code]);
