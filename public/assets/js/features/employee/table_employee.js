@@ -1,4 +1,4 @@
-import { fetch_employee_list } from "../employee/employee_list.js";
+import { fetch_employee_list } from "./employee_data.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const table_body = document.getElementById('table-body');
@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${item.telephone_number}</td>
                         <td>${item.department_name}</td>
                         <td>${item.position_name}</td>
-                        <td>${new Date(item.join_date).toLocaleDateString('id-ID')}</td>
                         <td><span class="${badgeStatus}">${item.employement_status}</span></td>
                         <td>${item.role_name}</td>
                         <td>
