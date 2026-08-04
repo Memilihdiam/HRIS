@@ -22,7 +22,8 @@ exports.login_user = async (employee_code, password) => {
         throw error;
     };
 
-    const user = await auth_repository.find_user_for_login(employee_code, password);
+    const user = await auth_repository.find_user_for_login(employee_code);
+
     if(!user){
         const error = new Error("User Not Found");
         error.statusCode = HTTP_STATUS.NOT_FOUND;
