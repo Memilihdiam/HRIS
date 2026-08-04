@@ -1,6 +1,65 @@
 # WEB BASED HUMAN RESOURCE INFORMATION SYSTEM (HRIS)
 Human Resource Information System 
 
+# COMPANY STRUCTURE
+## Departments
+```bash
+| Department                | Code |
+| ------------------------- | ---- |
+| Management                | MG   |
+| Procurement               | PR   |
+| Sales                     | SL   |
+| Business Development      | BD   |
+| Tender                    | TD   |
+| Project Management        | PM   |
+| Operations                | OP   |
+| Logistics                 | LG   |
+| Warehouse                 | WH   |
+| Supply Chain              | SC   |
+| Finance                   | FN   |
+| Accounting                | AC   |
+| Finance & Accounting      | FA   |
+| Human Resources           | HR   |
+| General Affairs           | GA   |
+| HR & GA                   | HG   |
+| Legal                     | LGA  |
+| Compliance                | CP   |
+| Quality Assurance         | QA   |
+| Quality Control           | QC   |
+| Information Technology    | IT   |
+| Customer Service          | CS   |
+| Health Safety Environment | HS   |
+```
+
+## Positions
+```bash
+| Position          | Code |
+| ----------------- | ---- |
+| Director          | DIR  |
+| General Manager   | GM   |
+| Manager           | MGR  |
+| Assistant Manager | AM   |
+| Supervisor        | SPV  |
+| Team Leader       | TL   |
+| Senior Staff      | SS   |
+| Staff             | STF  |
+| Junior Staff      | JS   |
+| Officer           | OF   |
+| Coordinator       | CO   |
+| Administrator     | ADM  |
+| Specialist        | SPC  |
+| Analyst           | ANL  |
+| Technician        | TEC  |
+| Operator          | OPR  |
+| Inspector         | INS  |
+| Recruiter         | REC  |
+| Accountant        | ACC  |
+| Storekeeper       | SK   |
+| Intern            | INT  |
+| Trainee           | TRN  |
+
+```
+
 # PREPARATION
 ## Create Database
 **TABLE: departments**

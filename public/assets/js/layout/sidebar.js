@@ -1,4 +1,5 @@
 import { fetch_user_data } from "../features/users/user_data.js";
+import { handleAuthError } from "../shared/auth.js";
 
 const menuItems = [
     {name: 'Payrolls', path: '/pages/payrolls.html', icon: 'bi-cash-stack', category: 'ACTIVITY', role: ['HR', 'FA']},
@@ -83,11 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Failed to render sidebar:', error);
-            if (error.message.includes('Invalid Token') || error.message.includes('session')) {
-                window.location.href = '/';
-            } else {
-                sidebarDisplay.innerHTML = `<p style="color: red; padding: 1rem;">Could not load user data.</p>`;
-            }
+            handleAuthError(error);
+            sidebarDisplay.innerHTML = `<p style="color: red; padding: 1rem;">Could not load user data.</p>`;
         }
     }
 });
