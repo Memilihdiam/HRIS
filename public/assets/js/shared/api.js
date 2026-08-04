@@ -2,6 +2,7 @@ export const api_endpoint = {
     LOGIN: '/api/login',
     REGISTER: '/api/register',
     USERDATA: '/api/me',
+    EMPLOYEESLIST: '/api/employees',
 }
 
 async function get(url){

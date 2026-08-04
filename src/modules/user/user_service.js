@@ -6,16 +6,16 @@ exports.user_data_service = async (id) => {
     const cacheKey = `user:${id}`;
     const CACHE_EXPIRATION = 3600;
 
-    try {
+    try{
         // Cek redis cache data
         const cachedUser = await redisClient.get(cacheKey);
-        if (cachedUser) {
+        if(cachedUser){
             return { user: JSON.parse(cachedUser) };
         }
 
         const user = await user_repository.find_user_by_id(id);
 
-        if (!user) {
+        if(!user){
             const error = new Error("User Not Found");
             error.statusCode = HTTP_STATUS.NOT_FOUND;
             throw error;
@@ -25,7 +25,7 @@ exports.user_data_service = async (id) => {
         await redisClient.set(cacheKey, JSON.stringify(user), 'EX', CACHE_EXPIRATION);
 
         return { user };
-    } catch (err) {
+    }catch(err){
         console.error('Error in user_data_service:', err);
         throw err;
     }

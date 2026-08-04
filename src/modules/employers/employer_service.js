@@ -1,4 +1,6 @@
+const redisClient = require('../../config/redis');
 const pool = require('../../config/db');
+const { HTTP_STATUS } = require('../../utils/util');
 const employer_repository = require('./employer_repository');
 
 /**
@@ -70,6 +72,39 @@ exports.register_user = async (employeeData) => {
     } catch (err) {
         if (connection) await connection.rollback();
         throw err; // Lemparkan error ke controller
+    } finally {
+        if (connection) connection.release();
+    }
+}
+
+/**
+ * Employees list data
+ * @return {Promise<Object>} - All employee list object
+ * @throws {Error} - If fails fetch data
+ */
+exports.employees_list = async () => {
+    let connection;
+    const cacheKey = `employees:list`
+    const CACHE_EXPIRATION = 3600;
+    
+    try{
+        const cachedData = await redisClient.get(cacheKey);
+        if (cachedData){
+            return { list: JSON.parse(cachedData) };
+        }
+
+        connection = await pool.getConnection();
+        await connection.beginTransaction();
+        
+        const list = await employer_repository.all_employees_data(connection);
+        
+        await redisClient.set(cacheKey, JSON.stringify(list), 'EX', CACHE_EXPIRATION);
+        await connection.commit();
+
+        return { list };
+    } catch (err) {
+        if (connection) await connection.rollback();
+        throw err;
     } finally {
         if (connection) connection.release();
     }

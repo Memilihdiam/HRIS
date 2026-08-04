@@ -3,6 +3,10 @@ import { fetch_user_data } from "../features/users/user_data.js";
 document.addEventListener('DOMContentLoaded', () => {
     const header_display = document.getElementById('header-display');
 
+    if(header_display){
+        render_header();
+    }
+
     async function render_header(){
         const user_data = await fetch_user_data();
         const employer_image = user_data.image_path ?? '/assets/images/default_profile_image.png'
@@ -20,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <li><a class="dropdown-item" href="/pages/setting.html"><i class="bi bi-gear-fill"></i> Settings</a></li>
                                     <li><a class="dropdown-item" href="/pages/profile.html"><i class="bi bi-person-fill"></i> Profile</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item text-danger" href="#" id="logout-btn"><i class="bi bi-door-open-fill"></i> Sign out</a></li>
+                                    <li><button class="dropdown-item text-danger" id="logout-btn"><i class="bi bi-door-open-fill"></i> Sign out</button></li>
                                 </ul>
                             </div>
                         </div>
@@ -30,5 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         header_display.innerHTML = rawHTML;
+
+        const logoutButton = document.getElementById('logout-btn');
+        logoutButton?.addEventListener('click', () => {
+            window.location.href = '/';
+        });
     }
 })
