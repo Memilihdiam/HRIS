@@ -1,10 +1,10 @@
 import { fetch_user_data } from "../features/users/user_data.js";
 import { handleAuthError } from "../shared/auth.js";
 
-const menuItems = [
-    {name: 'Payrolls', path: '/pages/payrolls.html', icon: 'bi-cash-stack', category: 'ACTIVITY', role: ['HR', 'FA']},
-    {name: 'Employers List', path: '/pages/employee_list.html', icon: 'bi-people-fill', category: 'ACTIVITY', role: ['HR', 'FA']}
-];
+// const menuItems = [
+//     {name: 'Payrolls', path: '/pages/payrolls.html', icon: 'bi-cash-stack', category: 'ACTIVITY', role: ['HR', 'FA']},
+//     {name: 'Employers List', path: '/pages/employee_list.html', icon: 'bi-people-fill', category: 'ACTIVITY', role: ['HR', 'FA']}
+// ];
 
 document.addEventListener('DOMContentLoaded', () => {
     const sidebarDisplay = document.getElementById('sidebar-display');
@@ -20,36 +20,36 @@ document.addEventListener('DOMContentLoaded', () => {
             // Menentukan halaman aktif untuk menyorot menu
             const currentPage = window.location.pathname;
 
-            // Filter menu yang diizinkan berdasarkan role
-            const allowedMenus = menuItems.filter(menu => menu.role.includes(user_data.department_code));
+            // // Filter menu yang diizinkan berdasarkan role
+            // const allowedMenus = menuItems.filter(menu => menu.role.includes(user_data.department_code));
 
-            // Kelompokkan menu berdasarkan kategori
-            const menuByCategory = allowedMenus.reduce((acc, menu) => {
-                if (!acc[menu.category]) {
-                    acc[menu.category] = [];
-                }
-                acc[menu.category].push(menu);
-                return acc;
-            }, {});
+            // // Kelompokkan menu berdasarkan kategori
+            // const menuByCategory = allowedMenus.reduce((acc, menu) => {
+            //     if (!acc[menu.category]) {
+            //         acc[menu.category] = [];
+            //     }
+            //     acc[menu.category].push(menu);
+            //     return acc;
+            // }, {});
 
             // Buat HTML untuk setiap kategori
-            const menuHTML = Object.entries(menuByCategory).map(([category, items]) => {
-                const itemHTML = items.map(menu => `
-                    <li class="nav-item">
-                        <a href="${menu.path}" class="nav-link text-white ${currentPage.includes(menu.path) ? 'active' : ''}">
-                            <i class="bi ${menu.icon} me-2"></i>
-                            ${menu.name}
-                        </a>
-                    </li>
-                `).join('');
+            // const menuHTML = Object.entries(menuByCategory).map(([category, items]) => {
+            //     const itemHTML = items.map(menu => `
+            //         <li class="nav-item">
+            //             <a href="${menu.path}" class="nav-link text-white ${currentPage.includes(menu.path) ? 'active' : ''}">
+            //                 <i class="bi ${menu.icon} me-2"></i>
+            //                 ${menu.name}
+            //             </a>
+            //         </li>
+            //     `).join('');
 
-                return `
-                    <li class="nav-item mt-2">
-                        <span class="nav-link text-secondary text-uppercase small fw-bold">${category}</span>
-                    </li>
-                    ${itemHTML}
-                `;
-            }).join('');
+            //     return `
+            //         <li class="nav-item mt-2">
+            //             <span class="nav-link text-secondary text-uppercase small fw-bold">${category}</span>
+            //         </li>
+            //         ${itemHTML}
+            //     `;
+            // }).join('');
 
             const sidebarHTML = `
                 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark h-100" style="width: 280px;">
@@ -68,7 +68,18 @@ document.addEventListener('DOMContentLoaded', () => {
                                 Dashboard
                             </a>
                         </li>
-                        ${menuHTML}
+                        <li class="nav-item">
+                            <a href="/pages/employee_list.html" class="nav-link text-white ${currentPage.includes('/pages/employee_list.html') ? 'active' : ''}">
+                                <i class="bi bi-person-fill me-2"></i>
+                                Employee List
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/pages/department.html" class="nav-link text-white ${currentPage.includes('/pages/Department.html') ? 'active' : ''}">
+                                <i class="bi bi-building-fill me-2"></i>
+                                Department
+                            </a>
+                        </li>
                     </ul>
                     <hr>
                 </div>

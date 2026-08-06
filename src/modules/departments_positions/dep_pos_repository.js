@@ -6,8 +6,8 @@ const { HTTP_STATUS } = require('../../utils/util');
  * @param {String} connection - Connection pool
  * @returns {Promise<Object>} - All department data
  */
-exports.find_departments = async (connection = pool) => {
-    const {rows} = await connection.execute('SELECT * FROM departments');
+exports.find_departments = async () => {
+    const [rows] = await pool.execute('SELECT * FROM departments');
     return rows;
 }
 
@@ -16,8 +16,8 @@ exports.find_departments = async (connection = pool) => {
  * @param {String} connection - Connection pool
  * @returns {Promise<Object>} - All position data
  */
-exports.find_positions = async (connection = pool) => {
-    const {rows} = await connection.execute('SELECT * FROM positions');
+exports.find_positions = async () => {
+    const [rows] = await pool.execute('SELECT * FROM positions');
     return rows;
 }
 
@@ -26,8 +26,8 @@ exports.find_positions = async (connection = pool) => {
  * @param {String} id - The department id
  * @return {Promise<Object>} - The department data
  */
-exports.find_department_by_id = async (connection = pool, id) => {
-    const {rows} = await connection.execute('SELECT * FROM departments WHERE id = ?', [id]);
+exports.find_department_by_id = async (id) => {
+    const [rows] = await pool.execute('SELECT * FROM departments WHERE id = ?', [id]);
     return rows[0];
 }
 
@@ -36,8 +36,8 @@ exports.find_department_by_id = async (connection = pool, id) => {
  * @param {String} id - The position id
  * @returns {Promise<Object>} - The position data
  */ 
-exports.find_position_by_id = async (connection = pool, id ) => {
-    const {rows} = await connection.execute('SELECT * FROM positions WHERE id = ?', [id]);
+exports.find_position_by_id = async (id) => {
+    const [rows] = await pool.execute('SELECT * FROM positions WHERE id = ?', [id]);
     return rows[0];
 }
 

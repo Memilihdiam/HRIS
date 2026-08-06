@@ -11,9 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const user_data = await fetch_user_data();
         const employer_image = user_data.image_path ?? '/assets/images/default_profile_image.png'
 
+        const path = window.location.pathname;
+        const pageName = path.split('/').filter(Boolean).pop();
+        const currentPage = pageName.replace(/[-_]/g, ' ').toUpperCase();
+
+
         const rawHTML = `
             <header class="p-3 bg-white shadow-sm d-flex justify-content-between align-items-center">
-                <h1 class="h4 fw-bold mb-0">Dashboard</h1>
+                <h1 class="h4 fw-bold mb-0">${currentPage}</h1>
                 <div class="d-flex align-items-center">
                     <i class="bi bi-bell-fill fs-5 text-secondary me-3"></i>
                     <div class="d-flex align-items-center">

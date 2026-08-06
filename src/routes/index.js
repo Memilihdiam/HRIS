@@ -22,7 +22,7 @@ route.get('/me', verifyToken, user_controller.get_user_data);
  * API for add new employee
  * @param {String} employeeData - The data employee inside array
  */
-route.post('/register', verifyToken, employer_controller.register);
+route.post('/register', employer_controller.register);
 
 /**
  * Api for get all employee list
@@ -38,6 +38,7 @@ route.get('/employees', verifyToken, employer_controller.employee_list);
  * @param {String} allowance - The allowance for a job
  */
 route.post('/job', verifyToken, dep_pos_controller.job_controller);
-route.get('/department/:id', verifyToken, dep_pos_controller.find_department);
+route.get('/job', verifyToken, dep_pos_controller.fetch_all_job);
+route.get('/departments/:id', verifyToken, dep_pos_controller.find_department);
 
 module.exports = route;

@@ -37,11 +37,60 @@ exports.department_position = async (department_id, position_id, basic_salary, a
         await dep_pos_repository.create_department_position(connection, department_id, position_id, job_name, job_code, basic_salary, allowance);
 
         await connection.commit();
+
+        const cacheRedis = ['all-departments', 'all-positions'];
+        await redisClient.del(cacheRedis);
     }catch(err){
         if(connection) await connection.rollback();
         throw err;
     }finally{
         if(connection) connection.release();
+    }
+}
+
+exports.get_all_departments = async () => {
+    const cachedKey = 'all-departments';
+    const CACHE_EXPIRATION = 3600;
+
+    try{
+        const cacheData = await redisClient.get(cachedKey);
+        if(cacheData){
+            return { departments: JSON.parse(cacheData) };
+        }
+
+        const departments = await dep_pos_repository.find_departments();
+        if(departments.length === 0){
+            return { departments: [] };
+        }
+
+        await redisClient.set(cachedKey, JSON.stringify(departments), 'EX', CACHE_EXPIRATION);
+
+        return { departments };
+    }catch(err){
+        throw err;
+    }
+}
+
+exports.get_all_positions = async () => {
+    const cachedKey = 'all-positions';
+    const CACHE_EXPIRATION = 3600;
+    
+    try{
+        const cacheData = await redisClient.get(cachedKey);
+        if(cacheData){
+            return { positions: JSON.parse(cacheData) };
+        }
+
+        const positions = await dep_pos_repository.find_positions();
+        if(positions.length === 0){
+            return { positions: [] };
+        }
+
+        await redisClient.set(cachedKey, JSON.stringify(positions), 'EX', CACHE_EXPIRATION);
+
+        return { positions };
+    }catch(err){
+        throw err;
     }
 }
 
@@ -54,17 +103,13 @@ exports.find_department = async (id) => {
     const cachedKey = `department:${id}`;
     const CACHE_EXPIRATION = 3600;
 
-    let connection;
     try{
         const cacheData = await redisClient.get(cachedKey);
         if(cacheData){
             return { department: JSON.parse(cacheData)};
         }
 
-        connection = await pool.getConnection();
-        await connection.beginTransaction();
-
-        const department = await dep_pos_repository.find_department_by_id(connection, id);
+        const department = await dep_pos_repository.find_department_by_id(id);
 
         if(!department){
             const error = new Error("Department Not Found");
@@ -73,14 +118,10 @@ exports.find_department = async (id) => {
         }
 
         await redisClient.set(cachedKey, JSON.stringify(department), 'EX', CACHE_EXPIRATION);
-        await connection.commit();
 
         return { department };
     }catch(err){
-        if(connection) await connection.rollback();
         throw err;
-    }finally{
-        if(connection) connection.release();
     }
 }
 

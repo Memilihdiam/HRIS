@@ -3,6 +3,7 @@ export const api_endpoint = {
     REGISTER: '/api/register',
     USERDATA: '/api/me',
     EMPLOYEESLIST: '/api/employees',
+    DEPARTMENT_POSITION_DATA: '/api/job'
 }
 
 async function get(url){
@@ -35,7 +36,7 @@ async function post(url, body){
             headers: {
                 'Content-Type': 'application/json',
             },
-            credentials: 'include', // Send cookies with the request
+            credentials: 'include',
             body: JSON.stringify(body)
         });
 

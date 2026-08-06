@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link rel="shortcut icon" href="/assets/images/company_icon.jpg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-light">
+    <div class="d-flex">
+        <!-- <div id="sidebar-display" class="min-vh-100"></div> -->
+        <div class="flex-grow-1">
+            <!-- <div id="header-display"></div> -->
+            <main class="p-4">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Add New Employee</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="add-form" class="row g-3">
+                            <div class="col-md-6">
+                                <label for="name-input" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name-input" placeholder="Enter full name" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="gender-input" class="form-label">Gender</label>
+                                <select id="gender-input" class="form-select" required>
+                                    <option value="">Choose Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label for="address-input" class="form-label">Address</label>
+                                <textarea class="form-control" id="address-input" placeholder="1234 Main St" required></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="date-of-birth-input" class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" id="date-of-birth-input" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email-input" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email-input" placeholder="name@example.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="telephone-number-input" class="form-label">Telephone Number</label>
+                                <input type="tel" class="form-control" id="telephone-number-input" placeholder="08123456789" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="join-date-input" class="form-label">Join Date</label>
+                                <input type="date" class="form-control" id="join-date-input" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="bank-name-input" class="form-label">Bank Name</label>
+                                <input type="text" class="form-control" id="bank-name-input" placeholder="e.g., BCA, Mandiri" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="account-number-input" class="form-label">Account Number</label>
+                                <input type="text" class="form-control" id="account-number-input" placeholder="Enter bank account number" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="position-id-input" class="form-label">Job Position</label>
+                                <select id="position-id-input" class="form-select" required>
+                                    <option value="">Choose Job Position</option>
+                                    <option value="2">Human Resource Administrator</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="employement-status-input" class="form-label">Employment Status</label>
+                                <select id="employement-status-input" class="form-select" required>
+                                    <option value="">Choose Status Worker</option>
+                                    <option value="1">Permanent</option>
+                                    <option value="2">Contract</option>
+                                    <option value="3">Intern</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="password-input" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password-input" placeholder="Create a password" required>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Add Employee</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="/assets/js/shared/config.js"></script>
+    <script type="module" src="/assets/js/layout/sidebar.js"></script>
+    <script type="module" src="/assets/js/layout/nav.js"></script>
+    <script type="module" src="/assets/js/features/employee/add_employee.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+</body>
+</html>

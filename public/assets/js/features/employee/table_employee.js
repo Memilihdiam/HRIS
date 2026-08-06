@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let tableRowHTML = '';
 
         if(data.length === 0){
-            tableRowHTML = `<tr><td colspan="14">No Data Yet</td></tr>`
+            tableRowHTML = `<tr><td colspan="14">No Data Yet</td></tr>`;
         }else{
             let no = 1;
             const statusColor = {
@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${item.address}</td>
                         <td>${item.email}</td>
                         <td>${item.telephone_number}</td>
-                        <td>${item.department_name}</td>
                         <td>${item.position_name}</td>
+                        <td>${item.department_name}</td>
                         <td><span class="${badgeStatus}">${item.employement_status}</span></td>
                         <td>${item.role_name}</td>
                         <td>
