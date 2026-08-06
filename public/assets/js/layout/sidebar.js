@@ -2,7 +2,7 @@ import { fetch_user_data } from "../features/users/user_data.js";
 import { handleAuthError } from "../shared/auth.js";
 
 // const menuItems = [
-//     {name: 'Payrolls', path: '/pages/payrolls.html', icon: 'bi-cash-stack', category: 'ACTIVITY', role: ['HR', 'FA']},
+//     {name: 'Payrolls', path: '/pages/payrolls.html', icon: 'bi-cash-stack', category: 'ACTIVITY', role: []},
 //     {name: 'Employers List', path: '/pages/employee_list.html', icon: 'bi-people-fill', category: 'ACTIVITY', role: ['HR', 'FA']}
 // ];
 
@@ -80,10 +80,16 @@ document.addEventListener('DOMContentLoaded', () => {
                                 Department
                             </a>
                         </li>
-                        <li class="nva-item">
+                        <li class="nav-item">
                             <a href="/pages/vendor.html" class="nav-link text-white ${currentPage.includes('/pages/vendor.html') ? 'active' : ''}">
                                 <i class="bi bi-buildings-fill me-2"></i>
                                 Vendors
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/pages/add_vendor.html" class="nav-link text-white ${currentPage.includes('/pages/add_vendor.html') ? 'active' : ''}">
+                                <i class="bi bi-building-add me-2"></i>
+                                Add Vendor
                             </a>
                         </li>
                     </ul>

@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${item.id}</td>
                         <td>${item.department_name}</td>
                         <td>${item.department_code}</td>
-                        <td>${item.created_at}</td>
+                        <td>${new Date(item.created_at).toLocaleDateString('id-ID')}</td>
                         <td>
                             <button>Edit</button>
                             <button>Delete</button>

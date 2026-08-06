@@ -13,9 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }else{
             let no = 1;
             const statusColor = {
-                tetap: "badge text-bg-primary",
-                kontrak: "badge text-bg-info",
-                magang: "badge text-bg-success"
+                permanent: "badge text-bg-primary",
+                contract: "badge text-bg-info",
+                trainee: "badge text-bg-success"
             }
             data.forEach(item => {
                 const status = (item.employement_status).toLowerCase();

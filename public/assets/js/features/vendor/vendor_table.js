@@ -11,8 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if(vendors.length === 0){
             tableRowHTML = `<tr><td colspan="14" class="text-center">No Data Yet</td></tr>`;
         }else{
+            const statusColor = {
+                active: 'badge text-bg-success',
+                suspended: 'badge text-bg-warning',
+                blacklisted: 'badge text-bg-danger'
+            }
             let no = 1;
             vendors.forEach(item => {
+                const status = (item.status).toLowerCase();
+                const badgeClass = statusColor[status];
                 tableRowHTML += `
                     <tr>
                         <td>${no++}</td>
@@ -24,10 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${item.address}</td>
                         <td>${item.npwp}</td>
                         <td>${item.rating}</td>
-                        <td>${item.status}</td>
-                        <td>${item.created_by}</td>
-                        <td>${item.created_at}</td>
-                        <td>${item.updated_at}</td>
+                        <td><span class="${badgeClass}">${item.status}</span></td>
+                        <td>${item.created_name}</td>
+                        <td>${new Date(item.created_at).toLocaleDateString('id-ID')}</td>
+                        <td>${new Date(item.updated_at).toLocaleDateString('id-ID')}</td>
                     </tr>
                 `;
             })

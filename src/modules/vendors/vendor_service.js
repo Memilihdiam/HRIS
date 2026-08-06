@@ -4,8 +4,8 @@ const { HTTP_STATUS } = require('../../utils/util');
 const vendor_repository = require('./vendor_repository');
 
 exports.add_vendors = async (vendor_data, id) => {
-    const  { vendor_code, company_name, pic_name, email, telephone_number, address, npwp, rating, status } = vendor_data;
-    if(!vendor_code || !company_name || !pic_name || !email || !telephone_number || !address || !npwp || !rating || !rating || !status ){
+    const  { vendor_code, company_name, industry_id, pic_name, email, telephone_number, address, npwp, rating, status } = vendor_data;
+    if(!vendor_code || !company_name || !industry_id || !pic_name || !email || !telephone_number || !address || !npwp || !rating || !rating || !status ){
         const error = new Error("Field Can't Be Null");
         error.statusCode = HTTP_STATUS.BAD_REQUEST;
         throw error;
@@ -24,6 +24,8 @@ exports.add_vendors = async (vendor_data, id) => {
         await vendor_repository.add_vendors(new_vendor_data, connection);
 
         await connection.commit();
+
+        await redisClient.del('vendors');
 
     }catch(err){
         if(connection) await connection.rollback();

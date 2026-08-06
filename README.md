@@ -589,6 +589,15 @@ CREATE TABLE attendance (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
 
+**TABLE: industries**
+```sql
+CREATE TABLE industries (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(30) UNIQUE NOT NULL,
+    name VARCHAR(100) NOT NULL
+)
+```
+
 **TABLE: vendors**
 ```sql
 CREATE TABLE vendors (
@@ -620,7 +629,7 @@ CREATE TABLE clients (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     client_code VARCHAR(20) NOT NULL UNIQUE,
     company_name VARCHAR(255) NOT NULL,
-    industry VARCHAR(100),
+    industry_id BIGINT NOT NULL,
     pic_name VARCHAR(100) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     telephone_number VARCHAR(20) NOT NULL,
@@ -629,7 +638,9 @@ CREATE TABLE clients (
     status ENUM('ACTIVE', 'INACTIVE') DEFAULT 'ACTIVE',
     
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_industry_id FOREIGN KEY (industry_id) REFERENCES industries(id) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
 

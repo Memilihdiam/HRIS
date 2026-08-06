@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             password: document.getElementById('password-input').value,
         };
 
-        // Validasi sederhana untuk memastikan tidak ada field yang kosong
+        // Validasi untuk memastikan tidak ada field yang kosong
         for (const key in employeeData) {
             if (!employeeData[key]) {
                 alert(`Error: Field "${key.replace(/_/g, ' ')}" cannot be empty.`);
