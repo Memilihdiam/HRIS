@@ -8,10 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const positions = data.positions;
         console.log(positions);
 
-        let tableRowHTML;
+        let tableRowHTML = '';
 
         if(departments.length === 0){
-            tableRowHTML = `<tr><td colspan="14">No Data Yet</td></tr>`;
+            tableRowHTML = `<tr><td colspan="6" class="text-center">No Data Yet</td></tr>`;
         }else{
             let no = 1;
             departments.forEach(item => {
@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     </tr>
                 `
             })
-            tableBody.innerHTML = tableRowHTML;
         }
+        tableBody.innerHTML = tableRowHTML;
     }
 
     department_table();

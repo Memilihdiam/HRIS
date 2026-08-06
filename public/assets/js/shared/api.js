@@ -1,9 +1,11 @@
 export const api_endpoint = {
-    LOGIN: '/api/login',
-    REGISTER: '/api/register',
-    USERDATA: '/api/me',
+    LOGIN: '/api/auth',
+    REGISTER: '/api/employees',
+    USERDATA: '/api/users/me',
     EMPLOYEESLIST: '/api/employees',
-    DEPARTMENT_POSITION_DATA: '/api/job'
+    DEPARTMENT_POSITION_DATA: '/api/jobs',
+    ADDVENDOR: '/api/vendors',
+    VENDORDATA: '/api/vendors',
 }
 
 async function get(url){

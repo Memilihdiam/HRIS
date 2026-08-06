@@ -80,6 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 Department
                             </a>
                         </li>
+                        <li class="nva-item">
+                            <a href="/pages/vendor.html" class="nav-link text-white ${currentPage.includes('/pages/vendor.html') ? 'active' : ''}">
+                                <i class="bi bi-buildings-fill me-2"></i>
+                                Vendors
+                            </a>
+                        </li>
                     </ul>
                     <hr>
                 </div>
