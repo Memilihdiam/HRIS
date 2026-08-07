@@ -92,6 +92,18 @@ document.addEventListener('DOMContentLoaded', () => {
                                 Add Vendor
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/pages/client.html" class="nav-link text-white ${currentPage.includes('/pages/client.html') ? 'active' : ''}">
+                                <i class="bi bi-people-fill me-2"></i>
+                                Clients
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/pages/add_client.html" class="nav-link text-white ${currentPage.includes('/pages/add_client.html') ? 'active' : ''}">
+                                <i class="bi bi-building-add me-2"></i>
+                                Add Client
+                            </a>
+                        </li>
                     </ul>
                     <hr>
                 </div>

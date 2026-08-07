@@ -6,7 +6,9 @@ export const api_endpoint = {
     DEPARTMENT_POSITION_DATA: '/api/jobs',
     ADDVENDOR: '/api/vendors',
     VENDORDATA: '/api/vendors',
-    INDUSTRYDATA: '/api/industries'
+    INDUSTRYDATA: '/api/industries',
+    CLIENTDATA: '/api/clients',
+    ADDCLIENT: '/api/clients',
 }
 
 async function get(url){

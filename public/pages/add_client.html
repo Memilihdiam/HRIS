@@ -76,13 +76,13 @@
             <main class="p-4">
                 <div class="card shadow-sm">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">Add Vendor</h5>
+                        <h5 class="card-title mb-0">Add Client</h5>
                     </div>
                     <div class="card-body">
                         <form id="add-form" class="row g-3">
                             <div class="col-md-6">
-                                <label for="vendor-code-input" class="form-label">Vendor Code</label>
-                                <input type="text" class="form-control" id="company-code-input" placeholder="Enter 3 Character Code (ex 'KWC')" required>
+                                <label for="client-code-input" class="form-label">Client Code</label>
+                                <input type="text" class="form-control" id="client-code-input" placeholder="Enter 3 Character Code (ex 'KWC')" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="company-name-input" class="form-label">Company Name</label>
@@ -104,34 +104,25 @@
                                 <label for="telephone-number-input" class="form-label">Telephone Number</label>
                                 <input type="tel" class="form-control" id="telephone-number-input" placeholder="Telephone Number" required>
                             </div>
-                            <div class="col-12">
+                            <div class="col-6">
                                 <label for="address-input" class="form-label">Company Address</label>
                                 <textarea class="form-control" id="address-input" placeholder="1234 Main St" required></textarea>
                             </div>
-                            <div class="col-md-6">
-                                <label for="npwp-input" class="form-label">NPWP</label>
-                                <input type="text" class="form-control" id="npwp-input" placeholder="NPWP" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="rating-input" class="form-label">Rating</label>
-                                <input type="number" class="form-control" id="rating-input" placeholder="Rating" required>
-                            </div>
-                            <div class="col-md-12 align-items">
+                            <div class="col-md-6 align-items">
                                 <label for="status-input" class="form-label">Status</label>
                                 <select id="status-input" class="form-select" required>
                                     <option value="">Choose status</option>
                                     <option value="ACTIVE">Activate</option>
-                                    <option value="SUSPENDED">Suspended</option>
-                                    <option value="BLACKLISTED">Blacklist</option>
+                                    <option value="INACTIVE">Inactive</option>
                                 </select>
                             </div>
                             <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-primary w-40">Add Vendor</button>
+                                <button type="submit" class="btn btn-primary w-40">Add Client</button>
                             </div>
                         </form>
                         <div class="row g-3 m-1">
                             <div class="col-md-12 text-center">
-                                <button onclick="window.location.href = './vendor.html'" class="btn btn-secondary">Back</button>
+                                <button onclick="window.location.href = './client.html'" class="btn btn-secondary">Back</button>
                             </div>
                         </div>
                     </div>
@@ -142,7 +133,7 @@
     <script src="/assets/js/shared/config.js"></script>
     <script type="module" src="/assets/js/layout/sidebar.js"></script>
     <script type="module" src="/assets/js/layout/nav.js"></script>
-    <script type="module" src="/assets/js/features/vendor/add_vendor.js"></script>
+    <script type="module" src="/assets/js/features/client/add_client.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
 </body>
