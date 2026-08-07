@@ -104,6 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
                                 Add Client
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/pages/roles/add_role.html" class="nav-link text-white ${currentPage.includes('/pages/role.html') ? 'active' : ''}">
+                                <i class="bi bi-key-fill me-2"></i>
+                                Roles
+                            </a>
+                        </li>
                     </ul>
                     <hr>
                 </div>

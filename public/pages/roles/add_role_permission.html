@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client</title>
+    <title>Role</title>
     <link rel="shortcut icon" href="/assets/images/company_icon.jpg" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
@@ -70,24 +70,30 @@
         <div class="flex-grow-1">
             <div id="header-display"></div>
             <main class="p-4">
-                <div class="m-3 bg-light rounded">
-                    <table class="table">
-                        <thead class="table-dark">
-                            <tr>
-                                <th>NO</th>
-                                <th>CLIENT CODE</th>
-                                <th>COMPANY NAME</th>
-                                <th>PIC NAME</th>
-                                <th>EMAIL</th>
-                                <th>TELEPHONE NUMBER</th>
-                                <th>ADDRESS</th>
-                                <th>STATUS</th>
-                                <th>CREATED AT</th>
-                                <th>UPDATE AT</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-body"></tbody>
-                    </table>
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Add Role Permission</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="add-form" class="row g-3">
+                            <div class="col-md-6">
+                                <label for="role-name-input" class="form-label">Role Name</label>
+                                <select type="text" class="form-control" id="role-name-input" placeholder="Role Name" required></select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="description-input" class="form-label">Permission Name</label>
+                                <select type="text" class="form-control" id="permission-input" placeholder="Permission" required></select>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary w-40">Add Role Permission</button>
+                            </div>
+                        </form>
+                        <div class="row g-3 m-1">
+                            <div class="col-md-12 text-center">
+                                <button onclick="window.location.href = './role.html'" class="btn btn-secondary">Back</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
@@ -95,7 +101,7 @@
     <script src="/assets/js/shared/config.js"></script>
     <script type="module" src="/assets/js/layout/sidebar.js"></script>
     <script type="module" src="/assets/js/layout/nav.js"></script>
-    <script type="module" src="/assets/js/features/client/client_table.js"></script>
+    <script type="module" src="/assets/js/features/role/add_role_permission.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
 </body>

@@ -9,6 +9,12 @@ export const api_endpoint = {
     INDUSTRYDATA: '/api/industries',
     CLIENTDATA: '/api/clients',
     ADDCLIENT: '/api/clients',
+    ROLEDATA: '/api/roles/role',
+    PERMISSIONDATA: '/api/roles/permission',
+    ROLEPERMISSION: '/api/roles/role/permission',
+    ADDROLE: '/api/roles/add/role',
+    ADDPERMISSION: '/api/roles/add/permission',
+    ADD_ROLE_PERMISSION: '/api/roles/add/role/permission'
 }
 
 async function get(url){
