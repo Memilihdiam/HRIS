@@ -63,51 +63,51 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="nav-link text-secondary text-uppercase small fw-bold">GENERAL</span>
                         </li>
                         <li class="nav-item">
-                            <a href="/pages/dashboard.html" class="nav-link text-white ${currentPage.includes('/pages/dashboard.html') ? 'active' : ''}">
+                            <a href="/pages/dashboards/dashboard.html" class="nav-link text-white ${currentPage.includes('/pages/dashboards/dashboard.html') ? 'active' : ''}">
                                 <i class="bi bi-grid-fill me-2"></i>
                                 Dashboard
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/pages/employee_list.html" class="nav-link text-white ${currentPage.includes('/pages/employee_list.html') ? 'active' : ''}">
+                            <a href="/pages/employees/employee_list.html" class="nav-link text-white ${currentPage.includes('/pages/employees/employee_list.html') ? 'active' : ''}">
                                 <i class="bi bi-person-fill me-2"></i>
                                 Employee List
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/pages/department.html" class="nav-link text-white ${currentPage.includes('/pages/Department.html') ? 'active' : ''}">
+                            <a href="/pages/departments/department.html" class="nav-link text-white ${currentPage.includes('/pages/departments/department.html') ? 'active' : ''}">
                                 <i class="bi bi-building-fill me-2"></i>
                                 Department
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/pages/vendor.html" class="nav-link text-white ${currentPage.includes('/pages/vendor.html') ? 'active' : ''}">
+                            <a href="/pages/vendors/vendor.html" class="nav-link text-white ${currentPage.includes('/pages/vendors/vendor.html') ? 'active' : ''}">
                                 <i class="bi bi-buildings-fill me-2"></i>
                                 Vendors
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/pages/add_vendor.html" class="nav-link text-white ${currentPage.includes('/pages/add_vendor.html') ? 'active' : ''}">
+                            <a href="/pages/vendors/add_vendor.html" class="nav-link text-white ${currentPage.includes('/pages/vendors/add_vendor.html') ? 'active' : ''}">
                                 <i class="bi bi-building-add me-2"></i>
                                 Add Vendor
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/pages/client.html" class="nav-link text-white ${currentPage.includes('/pages/client.html') ? 'active' : ''}">
+                            <a href="/pages/clients/client.html" class="nav-link text-white ${currentPage.includes('/pages/clients/client.html') ? 'active' : ''}">
                                 <i class="bi bi-people-fill me-2"></i>
                                 Clients
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/pages/add_client.html" class="nav-link text-white ${currentPage.includes('/pages/add_client.html') ? 'active' : ''}">
+                            <a href="/pages/clients/add_client.html" class="nav-link text-white ${currentPage.includes('/pages/clients/add_client.html') ? 'active' : ''}">
                                 <i class="bi bi-building-add me-2"></i>
                                 Add Client
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/pages/roles/add_role.html" class="nav-link text-white ${currentPage.includes('/pages/role.html') ? 'active' : ''}">
+                            <a href="/pages/roles/roles/add_role.html" class="nav-link text-white ${currentPage.includes('/pages/roles/role.html') ? 'active' : ''}">
                                 <i class="bi bi-key-fill me-2"></i>
-                                Roles
+                                Add Roles
                             </a>
                         </li>
                     </ul>
