@@ -662,6 +662,556 @@ CREATE TABLE projects (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
 
+**TABLE: project_statuses**
+```sql
+CREATE TABLE project_statuses (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    status_name VARCHAR(100) NOT NULL,
+)
+```
+
+**TABLE: project_budgets**
+```sql
+CREATE TABLE project_budgets (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    project_id BIGINT NOT NULL,
+
+    budget_category ENUM(
+        'MATERIAL',
+        'LABOR',
+        'VENDOR',
+        'TRANSPORT',
+        'OPERATIONAL',
+        'OTHER'
+    ) NOT NULL,
+
+    planned_amount DECIMAL(18,2) NOT NULL DEFAULT 0,
+    actual_amount DECIMAL(18,2) NOT NULL DEFAULT 0,
+
+    notes TEXT,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (project_id) REFERENCES projects(id)
+);
+```
+
+**TABLE: project_tasks**
+```sql
+CREATE TABLE project_tasks (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    project_id BIGINT NOT NULL,
+
+    parent_task_id BIGINT NULL,
+
+    task_name VARCHAR(255) NOT NULL,
+
+    description TEXT,
+
+    assigned_to BIGINT NULL,
+
+    priority ENUM(
+        'LOW',
+        'MEDIUM',
+        'HIGH',
+        'CRITICAL'
+    ) DEFAULT 'MEDIUM',
+
+    progress DECIMAL(5,2) DEFAULT 0,
+
+    start_date DATE,
+    due_date DATE,
+
+    status ENUM(
+        'OPEN',
+        'IN_PROGRESS',
+        'REVIEW',
+        'DONE',
+        'CANCELLED'
+    ) DEFAULT 'OPEN',
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (project_id) REFERENCES projects(id),
+    FOREIGN KEY (parent_task_id) REFERENCES project_tasks(id),
+    FOREIGN KEY (assigned_to) REFERENCES employees(id)
+);
+```
+
+**TABLE: project_milestones**
+```sql
+CREATE TABLE project_milestones (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    project_id BIGINT NOT NULL,
+
+    milestone_name VARCHAR(255) NOT NULL,
+
+    target_date DATE NOT NULL,
+
+    actual_date DATE NULL,
+
+    progress DECIMAL(5,2) DEFAULT 0,
+
+    status ENUM(
+        'PENDING',
+        'ONGOING',
+        'COMPLETED',
+        'DELAYED'
+    ) DEFAULT 'PENDING',
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (project_id) REFERENCES projects(id)
+);
+```
+
+**TABLE: rfqs**
+```sql
+CREATE TABLE rfqs (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    project_id BIGINT NOT NULL,
+
+    rfq_number VARCHAR(50) NOT NULL UNIQUE,
+
+    title VARCHAR(255) NOT NULL,
+
+    description TEXT,
+
+    created_by BIGINT NOT NULL,
+
+    issue_date DATE NOT NULL,
+    deadline DATE NOT NULL,
+
+    status ENUM(
+        'DRAFT',
+        'OPEN',
+        'CLOSED',
+        'AWARDED',
+        'CANCELLED'
+    ) DEFAULT 'DRAFT',
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (project_id) REFERENCES projects(id),
+    FOREIGN KEY (created_by) REFERENCES employees(id)
+);
+```
+
+**TABLE: rfq_vendors**
+```sql
+CREATE TABLE rfq_vendors (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    rfq_id BIGINT NOT NULL,
+    vendor_id BIGINT NOT NULL,
+
+    invited_at DATETIME,
+
+    UNIQUE KEY uk_rfq_vendor (
+        rfq_id,
+        vendor_id
+    ),
+
+    FOREIGN KEY (rfq_id) REFERENCES rfqs(id),
+    FOREIGN KEY (vendor_id) REFERENCES vendors(id)
+);
+```
+
+**TABLE: vendor_quotations**
+```sql
+CREATE TABLE vendor_quotations (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    rfq_id BIGINT NOT NULL,
+
+    vendor_id BIGINT NOT NULL,
+
+    quotation_number VARCHAR(50),
+
+    quotation_date DATE,
+
+    amount DECIMAL(18,2) NOT NULL,
+
+    lead_time_days INT,
+
+    validity_until DATE,
+
+    notes TEXT,
+
+    status ENUM(
+        'SUBMITTED',
+        'SHORTLISTED',
+        'SELECTED',
+        'REJECTED'
+    ) DEFAULT 'SUBMITTED',
+
+    attachment_path TEXT,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (rfq_id) REFERENCES rfqs(id),
+    FOREIGN KEY (vendor_id) REFERENCES vendors(id)
+);
+```
+
+**TABLE: good_receipts**
+```sql
+CREATE TABLE goods_receipts (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    po_id BIGINT NOT NULL,
+
+    receipt_number VARCHAR(50) NOT NULL UNIQUE,
+
+    receipt_date DATE NOT NULL,
+
+    received_by BIGINT NOT NULL,
+
+    notes TEXT,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (po_id)
+        REFERENCES purchase_orders(id),
+
+    FOREIGN KEY (received_by)
+        REFERENCES employees(id)
+);
+```
+
+**TABLE: good_receipt_items**
+```sql
+CREATE TABLE goods_receipt_items (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    goods_receipt_id BIGINT NOT NULL,
+
+    po_item_id BIGINT NOT NULL,
+
+    received_qty INT NOT NULL,
+
+    accepted_qty INT DEFAULT 0,
+
+    rejected_qty INT DEFAULT 0,
+
+    notes TEXT,
+
+    FOREIGN KEY (goods_receipt_id)
+        REFERENCES goods_receipts(id),
+
+    FOREIGN KEY (po_item_id)
+        REFERENCES po_items(id)
+);
+```
+
+**TABLE: warehouse**
+```sql
+CREATE TABLE warehouses (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    warehouse_code VARCHAR(20) UNIQUE,
+
+    warehouse_name VARCHAR(100) NOT NULL,
+
+    address TEXT,
+
+    manager_id BIGINT NULL,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (manager_id)
+        REFERENCES employees(id)
+);
+```
+
+**TABLE: inventory_stocks**
+```sql
+CREATE TABLE inventory_stocks (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    warehouse_id BIGINT NOT NULL,
+
+    item_id BIGINT NOT NULL,
+
+    quantity DECIMAL(18,2) DEFAULT 0,
+
+    minimum_stock DECIMAL(18,2) DEFAULT 0,
+
+    maximum_stock DECIMAL(18,2) DEFAULT 0,
+
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+
+    UNIQUE KEY uk_stock (
+        warehouse_id,
+        item_id
+    ),
+
+    FOREIGN KEY (warehouse_id)
+        REFERENCES warehouses(id),
+
+    FOREIGN KEY (item_id)
+        REFERENCES items(id)
+);
+```
+
+**TABLE: stock_movements**
+```sql
+CREATE TABLE stock_movements (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    item_id BIGINT NOT NULL,
+
+    warehouse_id BIGINT NOT NULL,
+
+    movement_type ENUM(
+        'IN',
+        'OUT',
+        'TRANSFER',
+        'ADJUSTMENT'
+    ) NOT NULL,
+
+    quantity DECIMAL(18,2) NOT NULL,
+
+    reference_type VARCHAR(50),
+
+    reference_id BIGINT,
+
+    movement_date DATETIME NOT NULL,
+
+    notes TEXT,
+
+    created_by BIGINT,
+
+    FOREIGN KEY (item_id)
+        REFERENCES items(id),
+
+    FOREIGN KEY (warehouse_id)
+        REFERENCES warehouses(id),
+
+    FOREIGN KEY (created_by)
+        REFERENCES employees(id)
+);
+```
+
+**TABLE: vendor_evaluations**
+```sql
+CREATE TABLE vendor_evaluations (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    vendor_id BIGINT NOT NULL,
+
+    project_id BIGINT NOT NULL,
+
+    quality_score DECIMAL(5,2),
+
+    delivery_score DECIMAL(5,2),
+
+    communication_score DECIMAL(5,2),
+
+    price_score DECIMAL(5,2),
+
+    overall_score DECIMAL(5,2),
+
+    notes TEXT,
+
+    evaluated_by BIGINT NOT NULL,
+
+    evaluated_at DATETIME NOT NULL,
+
+    FOREIGN KEY (vendor_id)
+        REFERENCES vendors(id),
+
+    FOREIGN KEY (project_id)
+        REFERENCES projects(id),
+
+    FOREIGN KEY (evaluated_by)
+        REFERENCES employees(id)
+);
+```
+
+**TABLE: project_documents**
+```sql
+CREATE TABLE project_documents (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    project_id BIGINT NOT NULL,
+
+    document_type ENUM(
+        'CONTRACT',
+        'PO',
+        'BAST',
+        'DRAWING',
+        'INVOICE',
+        'PHOTO',
+        'OTHER'
+    ),
+
+    file_name VARCHAR(255),
+
+    file_path TEXT NOT NULL,
+
+    version_no INT DEFAULT 1,
+
+    uploaded_by BIGINT NOT NULL,
+
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (project_id)
+        REFERENCES projects(id),
+
+    FOREIGN KEY (uploaded_by)
+        REFERENCES employees(id)
+);
+```
+
+**TABLE: approvals**
+```sql
+CREATE TABLE approvals (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    reference_type VARCHAR(50) NOT NULL,
+
+    reference_id BIGINT NOT NULL,
+
+    approver_id BIGINT NOT NULL,
+
+    approval_level INT DEFAULT 1,
+
+    status ENUM(
+        'PENDING',
+        'APPROVED',
+        'REJECTED'
+    ) DEFAULT 'PENDING',
+
+    approved_at DATETIME NULL,
+
+    notes TEXT,
+
+    FOREIGN KEY (approver_id)
+        REFERENCES employees(id)
+);
+```
+
+**TABLE: project_risks**
+```sql
+CREATE TABLE project_risks (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    project_id BIGINT NOT NULL,
+
+    risk_name VARCHAR(255) NOT NULL,
+
+    description TEXT,
+
+    probability ENUM(
+        'LOW',
+        'MEDIUM',
+        'HIGH'
+    ),
+
+    impact ENUM(
+        'LOW',
+        'MEDIUM',
+        'HIGH'
+    ),
+
+    mitigation_plan TEXT,
+
+    owner_id BIGINT,
+
+    status ENUM(
+        'OPEN',
+        'MITIGATED',
+        'CLOSED'
+    ) DEFAULT 'OPEN',
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (project_id)
+        REFERENCES projects(id),
+
+    FOREIGN KEY (owner_id)
+        REFERENCES employees(id)
+);
+```
+
+**TABLE: project_change_requests**
+```sql
+CREATE TABLE project_change_requests (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    project_id BIGINT NOT NULL,
+
+    request_number VARCHAR(50) UNIQUE,
+
+    request_type ENUM(
+        'SCOPE',
+        'BUDGET',
+        'TIMELINE',
+        'RESOURCE'
+    ),
+
+    old_value TEXT,
+    new_value TEXT,
+
+    reason TEXT,
+
+    requested_by BIGINT NOT NULL,
+
+    status ENUM(
+        'PENDING',
+        'APPROVED',
+        'REJECTED'
+    ) DEFAULT 'PENDING',
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (project_id)
+        REFERENCES projects(id),
+
+    FOREIGN KEY (requested_by)
+        REFERENCES employees(id)
+);
+```
+
+**TABLE: project_costs**
+```sql
+CREATE TABLE project_costs (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+
+    project_id BIGINT NOT NULL,
+
+    source_type ENUM(
+        'PO',
+        'VENDOR_BILL',
+        'PAYROLL',
+        'EXPENSE'
+    ),
+
+    source_id BIGINT NOT NULL,
+
+    cost_category VARCHAR(100),
+
+    amount DECIMAL(18,2) NOT NULL,
+
+    transaction_date DATE NOT NULL,
+
+    notes TEXT,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (project_id)
+        REFERENCES projects(id)
+);
+```
+
 **TABLE: teams**
 ```sql
 CREATE TABLE teams (

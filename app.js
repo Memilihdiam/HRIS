@@ -17,6 +17,11 @@ app.get(/\.html$/, (req, res) => {
     res.redirect(301, clean_url);
 })
 
+// Rute untuk menangani halaman detail project
+app.get('/pages/projects/project_detail/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public/pages/projects/project_detail.html'));
+});
+
 app.use(express.static(path.join(__dirname, "./public"), {extensions: ['html']}));
 app.use('/api', api_route);
 

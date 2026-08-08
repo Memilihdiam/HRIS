@@ -8,6 +8,7 @@ const user = require('../modules/user/user_api');
 const vendor = require('../modules/vendors/vendor_api');
 const client = require('../modules/clients/client_api');
 const industry = require('../modules/industries/industrie_api');
+const project = require('../modules/projects/project_api');
 
 route.use('/auth', auth);
 route.use('/roles', roles);
@@ -16,6 +17,7 @@ route.use('/employees', employee);
 route.use('/users', user);
 route.use('/vendors', vendor);
 route.use('/clients', client);
-route.use('/industries', industry)
+route.use('/industries', industry);
+route.use('/projects', project);
 
 module.exports = route;

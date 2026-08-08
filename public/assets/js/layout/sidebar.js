@@ -24,6 +24,10 @@ const menuItems = [
     { name: 'Add Role Permission', path: '/pages/roles/add_role_permission.html', icon: 'bi-controller', category: 'ROLES & PERMISSIONS', roles: ['Super Admin'] },
     { name: 'Add Permissions', path: '/pages/roles/add_permission.html', icon: 'bi-ui-checks', category: 'ROLES & PERMISSIONS', roles: ['Super Admin'] },
     { name: 'Add Roles', path: '/pages/roles/add_role.html', icon: 'bi-key-fill', category: 'ROLES & PERMISSIONS', roles: ['Super Admin'] },
+
+    // PROJECTS
+    { name: 'Project', path: '/pages/projects/project.html', icon: 'bi-gear-fill', category: 'PROJECTS', roles: ['Super Admin'] },
+    { name: 'Add Project', path: '/pages/projects/add_project.html', icon: 'bi-gear-wide-connected', category: 'PROJECTS', roles: ['Super Admin'] },
     
     // ACTIVITY (Contoh dari kode sebelumnya)
     { name: 'Payrolls', path: '/pages/payrolls.html', icon: 'bi-cash-stack', category: 'ACTIVITY', roles: ['Super Admin', 'Finance'] },

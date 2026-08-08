@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Project</title>
+    <link rel="shortcut icon" href="/assets/images/company_icon.jpg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
+</head>
+<body class="bg-light">
+    <div class="d-flex">
+        <div id="sidebar-display" class="min-vh-100"></div>
+        <div class="flex-grow-1">
+            <div id="header-display"></div>
+            <main class="p-4">
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Add New Project</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="add-project-form" class="row g-3">
+                            <div class="col-md-6">
+                                <label for="project-code-input" class="form-label">Project Code</label>
+                                <input type="text" class="form-control" id="project-code-input" placeholder="Enter project code" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="project-name-input" class="form-label">Project Name</label>
+                                <input type="text" class="form-control" id="project-name-input" placeholder="Enter project name" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="client-id-input" class="form-label">Client</label>
+                                <select id="client-id-input" class="form-select" required>
+                                    <option value="">Choose Client...</option>
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="start-date-input" class="form-label">Start Date</label>
+                                <input type="date" class="form-control" id="start-date-input" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="end-date-input" class="form-label">End Date</label>
+                                <input type="date" class="form-control" id="end-date-input" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="contract-value-input" class="form-label">Contract Value</label>
+                                <input type="number" class="form-control" id="contract-value-input" placeholder="Enter contract value" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="status-input" class="form-label">Status</label>
+                                <select id="status-input" class="form-select" required>
+                                    <option value="">Choose Status...</option>
+                                    <option value="DRAFT">Draft</option>
+                                    <option value="PLANNING">Planning</option>
+                                    <option value="RUNNING">Running</option>
+                                    <option value="ON_HOLD">On Hold</option>
+                                    <option value="COMPLETED">Completed</option>
+                                    <option value="CLOSED">Closed</option>
+                                </select>
+                            </div>
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-primary">Add Project</button>
+                            </div>
+                        </form>
+                        <div class="row g-3 mt-1">
+                            <div class="col-md-12 text-center">
+                                <button onclick="window.location.href = './project.html'" class="btn btn-secondary">Back to Project List</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="/assets/js/shared/config.js"></script>
+    <script type="module" src="/assets/js/layout/sidebar.js"></script>
+    <script type="module" src="/assets/js/layout/nav.js"></script>
+    <script type="module" src="/assets/js/features/project/add_project.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+</body>
+</html>
