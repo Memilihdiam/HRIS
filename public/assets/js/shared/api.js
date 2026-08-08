@@ -14,7 +14,8 @@ export const api_endpoint = {
     ROLEPERMISSION: '/api/roles/role/permission',
     ADDROLE: '/api/roles/add/role',
     ADDPERMISSION: '/api/roles/add/permission',
-    ADD_ROLE_PERMISSION: '/api/roles/add/role/permission'
+    ADD_ROLE_PERMISSION: '/api/roles/add/role/permission',
+    ADD_EMPLOYEE_ROLE: '/api/roles/add/user/role'
 }
 
 async function get(url){

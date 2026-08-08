@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function render_table(){
         const data = await fetch_employee_list();
-        console.log(data);
         let tableRowHTML = '';
 
         if(data.length === 0){
@@ -36,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>${item.position_name}</td>
                         <td>${item.department_name}</td>
                         <td><span class="${badgeStatus}">${item.employement_status}</span></td>
-                        <td>${item.role_name}</td>
                         <td>
                             <button class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
                             <button class="btn btn-warning"><i class="bi bi-pencil-fill"></i></button>

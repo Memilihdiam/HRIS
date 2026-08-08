@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Role</title>
+    <title>Employees</title>
     <link rel="shortcut icon" href="/assets/images/company_icon.jpg" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css">
@@ -66,47 +66,31 @@
 </head>
 <body class="bg-light">
     <div class="d-flex">
+        <div id="sidebar-display" class="min-vh-100"></div>
         <div class="flex-grow-1">
             <div id="header-display"></div>
             <main class="p-4">
                 <div class="card shadow-sm">
                     <div class="card-header">
-                        <h5 class="card-title mb-0">Add Permission</h5>
+                        <h5 class="card-title mb-0">Add Employee Role</h5>
                     </div>
                     <div class="card-body">
                         <form id="add-form" class="row g-3">
                             <div class="col-md-6">
-                                <label for="module-input" class="form-label">Module Name</label>
-                                <select class="form-select" id="module-input" required>
-                                    <option value="">Select Module</option>
-                                </select>
+                                <label for="employees-input" class="form-label">Employees</label>
+                                <select type="text" class="form-control" id="employees-input" placeholder="Employees" required></select>
                             </div>
                             <div class="col-md-6">
-                                <label for="action-input" class="form-label">Action</label>
-                                <select class="form-select" id="action-input" required>
-                                    <option value="">Select Action</option>
-                                    <option value="create">Create</option>
-                                    <option value="view">View</option>
-                                    <option value="update">Update</option>
-                                    <option value="delete">Delete</option>
-                                    <option value="manage">Manage</option>
-                                </select>
-                            </div>
-                            <div class="col-md-12">
-                                <label for="permission-name-input" class="form-label">Permission Name</label>
-                                <input type="text" class="form-control" id="permission-name-input" placeholder="Generated permission name" readonly required>
-                            </div>
-                            <div class="col-md-12">
-                                <label for="description-input" class="form-label">Description</label>
-                                <textarea type="text" class="form-control" id="description-input" placeholder="Description" required></textarea>
+                                <label for="role-input" class="form-label">Roles Name</label>
+                                <select type="text" class="form-control" id="role-input" placeholder="Roles" required></select>
                             </div>
                             <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-primary w-40">Add Permission</button>
+                                <button type="submit" class="btn btn-primary w-40">Add Employee Role</button>
                             </div>
                         </form>
                         <div class="row g-3 m-1">
                             <div class="col-md-12 text-center">
-                                <button onclick="window.location.href = './role.html'" class="btn btn-secondary">Back</button>
+                                <button onclick="window.location.href = './employee_list.html'" class="btn btn-secondary">Back</button>
                             </div>
                         </div>
                     </div>
@@ -117,7 +101,7 @@
     <script src="/assets/js/shared/config.js"></script>
     <script type="module" src="/assets/js/layout/sidebar.js"></script>
     <script type="module" src="/assets/js/layout/nav.js"></script>
-    <script type="module" src="/assets/js/features/role/add_permission.js"></script>
+    <script type="module" src="/assets/js/features/employee/employee_role.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
 </body>

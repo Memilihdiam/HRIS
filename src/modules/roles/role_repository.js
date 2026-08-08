@@ -34,8 +34,8 @@ exports.add_role = async (role_name, description, connection = pool) => {
     await connection.execute('INSERT INTO roles (role_name, description) VALUES (?, ?)', [role_name, description]);
 }
 
-exports.add_permission = async (module_name, permission_name, description, connection = pool) => {
-    await connection.execute('INSERT INTO permissions (module_name, permission_name, description) VALUES (?, ?, ?)', [module_name, permission_name, description]);
+exports.add_permission = async (module_name, action, permission_name, description, connection = pool) => {
+    await connection.execute('INSERT INTO permissions (module_name, action, permission_name, description) VALUES (?, ?, ?, ?)', [module_name, action, permission_name, description]);
 }
 
 exports.add_role_permission = async (role_id, permission_id, connection = pool) => {

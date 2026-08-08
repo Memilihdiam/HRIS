@@ -20,12 +20,9 @@ exports.all_employees_data = async(connection = pool) => {
             e.account_number,
             e.join_date,
             es.status_name AS employement_status,
-            r.role_name AS role_name,
             d.department_name AS department_name,
             dp.position_name AS position_name
-        FROM employees e
-        LEFT JOIN employee_roles er ON er.employee_id = e.id
-        LEFT JOIN roles r ON er.role_id = r.id
+            FROM employees e
         LEFT JOIN employee_employment_status ees ON ees.employee_id = e.id
         LEFT JOIN employment_status es ON  es.id = ees.status_id
         LEFT JOIN department_position dp ON e.position_id = dp.id

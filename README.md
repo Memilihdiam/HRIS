@@ -201,6 +201,7 @@ CREATE TABLE roles (
 CREATE TABLE permissions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     module_name VARCHAR(50) NOT NULL, -- cth: 'Vendor', 'Procurement', 'HR'
+    action VARCHAR(50) NOT NULL,
     permission_name VARCHAR(100) NOT NULL UNIQUE, -- cth: 'create_po', 'approve_payroll'
     description VARCHAR(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

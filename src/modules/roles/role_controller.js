@@ -116,7 +116,7 @@ exports.add_employee_role = async (req, res) => {
     try{
         const data = req.body;
 
-        await role_service.add_role(data);
+        await role_service.add_employee_role(data);
 
         return res.status(HTTP_STATUS.CREATED).json({
             success: true,

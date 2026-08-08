@@ -85,7 +85,7 @@ exports.add_role = async (data) => {
         await role_repository.add_role(role_name, description, connection);
 
         await connection.commit();
-        await redisClient.del('role-permissions');
+        await redisClient.del('roles');
     }catch(err){
         if(connection) await connection.rollback();
         throw err;
@@ -95,8 +95,8 @@ exports.add_role = async (data) => {
 }
 
 exports.add_permission = async (data) => {
-    const { module_name, permission_name, description } = data;
-    if(!module_name || !permission_name || !description){
+    const { module_name, action, permission_name, description } = data;
+    if(!module_name || !action || !permission_name || !description){
         const error = new Error("Field Can't Be Null");
         error.statusCode = HTTP_STATUS.BAD_REQUEST;
         throw error;
@@ -107,10 +107,10 @@ exports.add_permission = async (data) => {
         connection = await pool.getConnection();
         await connection.beginTransaction();
 
-        await role_repository.add_permission(module_name, permission_name, description, connection);
+        await role_repository.add_permission(module_name, action, permission_name, description, connection);
 
         await connection.commit();
-        await redisClient.del('role-permissions');
+        await redisClient.del('permissions');
     }catch(err){
         if(connection) await connection.rollback();
         throw err;
@@ -160,7 +160,12 @@ exports.add_employee_role = async (data) => {
         await role_repository.add_employee_role(employee_id, role_id, connection);
 
         await connection.commit();
-        await redisClient.del('employee-role');
+
+        await redisClient.del('employees:list');
+        const userCacheKey = `user:${employee_id}`;
+        if (await redisClient.exists(userCacheKey)) {
+            await redisClient.del(userCacheKey);
+        }
     }catch(err){
         if(connection) await connection.rollback();
         throw err;

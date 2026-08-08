@@ -1,26 +1,68 @@
 import { post, api_endpoint } from "../../shared/api.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-    const add_form = document.getElementById('add-form');
+    const modules = [
+        "Employees",
+        "Departments",
+        "Vendors",
+        "Clients",
+        "Roles",
+        "Permissions",
+        "Payrolls",
+        "Projects"
+    ];
 
-    add_form.addEventListener('submit', async (e) => {
+    const addForm = document.getElementById('add-form');
+    const moduleInput = document.getElementById('module-input');
+    const actionInput = document.getElementById('action-input');
+    const permissionNameInput = document.getElementById('permission-name-input');
+
+    // Fungsi untuk mengisi dropdown modul
+    function populateModules() {
+        modules.forEach(module => {
+            const option = document.createElement('option');
+            option.value = module.toLowerCase().replace(/\s+/g, '-'); // e.g., "Employee List" -> "employee-list"
+            option.textContent = module;
+            moduleInput.appendChild(option);
+        });
+    }
+
+    // Fungsi untuk meng-generate nama permission
+    function generatePermissionName() {
+        const moduleValue = moduleInput.value;
+        const actionValue = actionInput.value;
+
+        if (moduleValue && actionValue) {
+            permissionNameInput.value = `${moduleValue}:${actionValue}`;
+        } else {
+            permissionNameInput.value = '';
+        }
+    }
+
+    // Event listener untuk form
+    addForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        try{
-            const data = {
-                module_name: document.getElementById('module-name-input').value,
-                permission_name: document.getElementById('permission-name-input').value,
-                description: document.getElementById('description-input').value
-            }
+        const permissionData = {
+            module_name: moduleInput.options[moduleInput.selectedIndex].text,
+            action: actionInput.value,
+            permission_name: permissionNameInput.value,
+            description: document.getElementById('description-input').value,
+        };
 
-            const response = await post(api_endpoint.ADDPERMISSION, data);
+        try {
+            const response = await post(api_endpoint.ADDPERMISSION, permissionData);
             if(response.success){
-                alert(response.message);
-                window.location.href = '../../../pages/roles/role.html';
+                window.location.href = '/pages/roles/role.html';
             }
-        }catch(err){
-            console.log('Error', err);
-            alert(err);
+        } catch (error) {
+            console.error('Error, ', error);
+            alert('An error occurred while adding the permission.');
         }
-    })
-})
+    });
+
+    // Inisialisasi
+    populateModules();
+    moduleInput.addEventListener('change', generatePermissionName);
+    actionInput.addEventListener('change', generatePermissionName);
+});
